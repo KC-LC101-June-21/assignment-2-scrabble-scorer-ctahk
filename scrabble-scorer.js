@@ -38,37 +38,53 @@ function initialPrompt() {
 };
 
 let simpleScore = function(word) {
-  word = input.question("Let's play some scrabble! Enter a word:");
-  return word.length
+   word = input.question("Let's play some scrabble! Enter a word:");
+   return word.length
 };
+
 
 let vowelBonusScore = function(word) {
-  word = input.question("Let's play some scrabble! Enter a word:");
-  word = word.toUpperCase();
-  const vowelsAndConsonants = {
-    3: ["A", "E", "I", "O", "U"],
-    1: ["B", "C", "D", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"]
-  };
-  let bonusScore = 0;
+   word = input.question("Let's play some scrabble! Enter a word:");
+   word = word.toUpperCase();
+   const vowelsAndConsonants = {
+      3: ["A", "E", "I", "O", "U"],
+      1: ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"]
+   };
+   let bonusScore = 0;
 
-  for (let i = 0; i < word.length; i++) {
+   for (let i = 0; i < word.length; i++) {
+     for (const vowAndConPointScore in vowelsAndConsonants) {
+       if (vowelsAndConsonants[vowAndConPointScore].includes(word[i])) {
+         bonusScore += Number(vowAndConPointScore)
+       }
+     }
 
-    for (const vowAndConPointScore in vowelsAndConsonants) {
-      if (vowelsAndConsonants[vowAndConPointScore].includes(word[i])) {
-        bonusScore += Number(vowAndConPointScore)
-        
-      }
-    }
-
-  }
-  return bonusScore;
+   }
+   return bonusScore;
 };
 
-console.log(vowelBonusScore());
+let simpleScoreObj = {
+  name: "Simple Score",
+  description: "Each letter is worth 1 point.",
+  scoringFunction: simpleScore
+};
+
+let bonusVowelsObj = {
+  name: "Bonus Vowels",
+  description: "Vowels are 3 pts, consonants are 1 pt.",
+  scoringFunction: vowelBonusScore
+};
+
+let scrabbleObj = {
+  name: "Scrabble",
+  description: "The traditional scoring algorithim.",
+  scoringFunction: initialPrompt
+};
 
 let scrabbleScore;
 
-const scoringAlgorithms = [];
+const scoringAlgorithms = [simpleScoreObj, bonusVowelsObj, scrabbleObj];
+ 
 
 function scorerPrompt() {}
 
