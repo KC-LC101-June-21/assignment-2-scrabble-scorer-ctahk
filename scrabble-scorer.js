@@ -42,18 +42,17 @@ let simpleScore = function(word) {
    return word.length
 };
 
-
 let vowelBonusScore = function(word) {
    word = input.question("Let's play some scrabble! Enter a word:");
    word = word.toUpperCase();
-   const vowelsAndConsonants = {
+   vowelsAndConsonants = {
       3: ["A", "E", "I", "O", "U"],
       1: ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"]
    };
    let bonusScore = 0;
 
    for (let i = 0; i < word.length; i++) {
-     for (const vowAndConPointScore in vowelsAndConsonants) {
+     for (vowAndConPointScore in vowelsAndConsonants) {
        if (vowelsAndConsonants[vowAndConPointScore].includes(word[i])) {
          bonusScore += Number(vowAndConPointScore)
        }
@@ -64,20 +63,20 @@ let vowelBonusScore = function(word) {
 };
 
 let simpleScoreObj = {
-  name: "Simple Score",
-  description: "Each letter is worth 1 point.",
+  name: "Simple",
+  description: "One point per character",
   scoringFunction: simpleScore
 };
 
 let bonusVowelsObj = {
-  name: "Bonus Vowels",
-  description: "Vowels are 3 pts, consonants are 1 pt.",
+  name: "Vowel Bonus",
+  description: "Vowels are worth 3 points",
   scoringFunction: vowelBonusScore
 };
 
 let scrabbleObj = {
   name: "Scrabble",
-  description: "The traditional scoring algorithim.",
+  description: "Uses scrabble point system",
   scoringFunction: initialPrompt
 };
 
@@ -86,7 +85,19 @@ let scrabbleScore;
 const scoringAlgorithms = [simpleScoreObj, bonusVowelsObj, scrabbleObj];
  
 
-function scorerPrompt() {}
+function scorerPrompt() {
+  console.log(`Which scoring algorithm would you like to use?\n0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}`);
+  let algorithmChosen = Number(input.question("Enter 0, 1, or 2: "));
+  if (algorithmChosen = 0) {
+    return scoringAlgorithms[0].scoringFunction();
+  } else if (algorithmChosen = 1) {
+    return scoringAlgorithms[1].scoringFunction();
+  } else {
+    return scoringAlgorithms[2].scoringFunction();
+  } 
+  
+
+};
 
 function transform() {};
 
@@ -94,6 +105,7 @@ let newPointStructure;
 
 function runProgram() {
    initialPrompt();
+   scorerPrompt();
    
 }
 
