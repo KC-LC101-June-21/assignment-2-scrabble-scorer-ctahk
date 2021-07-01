@@ -66,11 +66,11 @@ let vowelBonusScore = function(word) {
 let scrabbleScore = function(word) {
   word = word.toLowerCase();
   let letterPoints = 0;
+
   for (let i = 0; i < word.length; i++){
-    for(newPointValue in newPointStructure) {
-      if (newPointStructure[newPointValue][word[i]]){
-        letterPoints += Number(newPointValue)
-        console.log(newPointValue);
+    for(letter in newPointStructure) {
+      if(letter === word[i]) {
+        letterPoints += newPointStructure[letter];
       }
     }
   }
@@ -123,7 +123,7 @@ function transform(obj) {
     }
   }
   
-  return console.log(revisedPointStructure);
+  return revisedPointStructure;
 
 };
 
