@@ -117,8 +117,11 @@ function transform(obj) {
   let revisedPointStructure = {};
   for (key in obj) {
     revisedPointStructure[obj[key]] = key;
-  
-    
+  }
+  for (value in obj){
+    for (let i = 0; i < obj[key].length; i++) {
+      revisedPointStructure[obj[key][i]] = value;
+    }
   }
   
   return revisedPointStructure;
