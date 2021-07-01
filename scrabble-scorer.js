@@ -118,7 +118,6 @@ function transform(obj) {
   for (key in obj) {
     for (let i = 0; i < obj[key].length; i++) {
       revisedPointStructure[obj[key][i]] = Number(key);
-      console.log(revisedPointStructure);
     }
   }
   
