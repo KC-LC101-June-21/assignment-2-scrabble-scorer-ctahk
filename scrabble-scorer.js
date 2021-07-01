@@ -119,7 +119,7 @@ function transform(obj) {
     for (let i = 0; i < obj[key].length; i++) {
       let letterElement = obj[key][i];
       letterElement.toLowerCase();
-      revisedPointStructure[`${letterElement}`] = Number(key);
+      revisedPointStructure[`${letterElement}`] += Number(key);
     }
   }
   
