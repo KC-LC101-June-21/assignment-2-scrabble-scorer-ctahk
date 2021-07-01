@@ -34,13 +34,13 @@ function oldScrabbleScorer(word) {
 
 function initialPrompt() {
 
-  input.question("Let's play some scrabble! Enter a word: ");
+  let word = input.question("Let's play some scrabble! Enter a word: ");
 
 };
 
 let simpleScore = function(word) {
 
-   return word.length
+   return word.length;
 
 };
 
@@ -58,23 +58,22 @@ let vowelBonusScore = function(word) {
          bonusScore += Number(vowAndConPointScore)
        }
      }
-
    }
    return bonusScore;
 };
 
 let scrabbleScore = function(word) {
   word = word.toLowerCase();
-  let letterPoints = 0;
+  let originalScore = 0;
 
   for (let i = 0; i < word.length; i++){
-    for(letter in newPointStructure) {
-      if(letter === word[i]) {
-        letterPoints += newPointStructure[letter];
+    for(letterInWord in newPointStructure) {
+      if(letterInWord === word[i]) {
+        originalScore += newPointStructure[letterInWord];
       }
     }
   }
-  return letterPoints
+  return originalScore;
 };
 
 let simpleScoreObj = {
@@ -98,8 +97,8 @@ let scrabbleObj = {
 const scoringAlgorithms = [simpleScoreObj, bonusVowelsObj, scrabbleObj];
  
 function scorerPrompt() {
-  let scoredWord = input.question("Let's play some scrabble! Enter a word to score:");
-  console.log(`Which scoring algorithm would you like to use?\n0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}`);
+  let scoredWord = input.question("Let's play some Scrabble!\n\nEnter a word to score: ");
+  console.log(`\nWhich scoring algorithm would you like to use?\n0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}`);
   let algorithmChosen = Number(input.question("Enter 0, 1, or 2: "));
   
   if (algorithmChosen === 0) {
@@ -117,9 +116,8 @@ function transform(obj) {
 
   for (key in obj) {
     for (let i = 0; i < obj[key].length; i++) {
-      let letterElement = obj[key][i];
-      letterElement = letterElement.toLowerCase();
-      revisedPointStructure[`${letterElement}`] = Number(key);
+      let letter = obj[key][i];
+      revisedPointStructure[`${letter.toLowerCase()}`] = Number(key);
     }
   }
   
