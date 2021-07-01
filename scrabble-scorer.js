@@ -102,7 +102,6 @@ function scorerPrompt() {
   console.log(`Which scoring algorithm would you like to use?\n0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}`);
   let algorithmChosen = Number(input.question("Enter 0, 1, or 2: "));
   
-
   if (algorithmChosen === 0) {
     return console.log(`Score for '${scoredWord}': ${scoringAlgorithms[0].scoringFunction(scoredWord)}`);
   } else if (algorithmChosen === 1) {
@@ -115,14 +114,16 @@ function scorerPrompt() {
 
 function transform(obj) {
   let revisedPointStructure = {};
+
   for (key in obj) {
     for (let i = 0; i < obj[key].length; i++) {
-      revisedPointStructure[obj[key][i]] = Number(key);
+      let letterElement = obj[key][i];
+      letterElement = letterElement.toLowerCase();
+      revisedPointStructure[`${letterElement}`] = Number(key);
     }
   }
   
-  
-  return revisedPointStructure;
+  return console.log(revisedPointStructure);
 
 };
 
