@@ -116,11 +116,9 @@ function scorerPrompt() {
 function transform(obj) {
   let revisedPointStructure = {};
   for (key in obj) {
-    for (let i = 0; i < obj[key].length; i++) {
-      let letterElement = obj[key][i];
-      letterElement.toLowerCase();
-      revisedPointStructure[`${letterElement}`] += Number(key);
+    revisedPointStructure[obj[key]] = key;
     }
+    return revisedPointStructure;
   }
   
   return revisedPointStructure;
